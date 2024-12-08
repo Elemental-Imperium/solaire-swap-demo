@@ -1,0 +1,46 @@
+/* Mobile-first approach */
+.container {
+  padding: 16px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Tablet (600px and up) */
+@media screen and (min-width: 600px) {
+  .container {
+    padding: 24px;
+    max-width: 600px;
+  }
+}
+
+/* Desktop (960px and up) */
+@media screen and (min-width: 960px) {
+  .container {
+    padding: 32px;
+    max-width: 1200px;
+  }
+}
+
+/* Component-specific responsive styles */
+.vault-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media screen and (min-width: 600px) {
+  .vault-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .vault-section {
+    flex: 1 1 calc(50% - 16px);
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .vault-section {
+    flex: 1 1 calc(33.333% - 16px);
+  }
+} 

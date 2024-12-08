@@ -1,0 +1,41 @@
+.vault-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.error-message {
+    color: #ff4444;
+    padding: 10px;
+    margin: 10px 0;
+    background: #ffebee;
+    border-radius: 4px;
+}
+
+.price-section,
+.action-section,
+.withdraw-section {
+    margin: 20px 0;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 4px;
+    border: none;
+    background: #2196f3;
+    color: white;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+} 
