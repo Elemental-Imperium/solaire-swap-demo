@@ -1,11 +1,13 @@
 require("dotenv").config();
-require("@nomiclabs/hardhat-ethers");
-require("@nomiclabs/hardhat-waffle");
-require("@nomiclabs/hardhat-etherscan");
+require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-verify");
 require("@openzeppelin/hardhat-upgrades");
 require("hardhat-gas-reporter");
 require("solidity-coverage");
 require("@typechain/hardhat");
+const { ethers } = require("ethers");
+
+// Suppress punycode deprecation warning - using userland module
 
 // Private key handling
 const getPrivateKey = () => {
@@ -23,7 +25,7 @@ const PRIVATE_KEY = getPrivateKey();
 module.exports = {
   defaultNetwork: process.env.DEFAULT_NETWORK || "hardhat",
   solidity: {
-    version: "0.8.19",
+    version: "0.8.20",
     settings: {
       optimizer: {
         enabled: true,
@@ -44,15 +46,12 @@ module.exports = {
       chainId: 31337
     },
     Defi_Oracle_Meta_Mainnet: {
-      url: process.env.MAINNET_RPC_URL,
+      url: "https://rpc.defi-oracle.io",
       chainId: parseInt(process.env.CHAIN_ID || "138"),
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : undefined,
       gasPrice: "auto",
-      verify: {
-        etherscan: {
-          apiKey: process.env.ETHERSCAN_API_KEY
-        }
-      }
+      timeout: 60000,
+      provider: new ethers.providers.JsonRpcProvider("https://rpc.defi-oracle.io")
     }
   },
   gasReporter: {

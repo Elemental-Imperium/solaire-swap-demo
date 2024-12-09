@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.20;
 
-import "../base/BaseStablecoin.sol";
+import "../BaseToken.sol";
 
-contract USDT is BaseStablecoin {
-    constructor() BaseStablecoin("Tether USD", "USDT", "USD") {
-        // Additional USDT-specific initialization
+contract USDT is BaseToken {
+    function initialize(address owner) public initializer {
+        super.initialize("Tether USD", "USDT", owner);
     }
 
-    // USDT-specific functions can be added here
-} 
+    // Add storage gap for future upgrades
+    uint256[50] private __gap;
+}

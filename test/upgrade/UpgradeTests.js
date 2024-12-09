@@ -117,7 +117,8 @@ describe("Upgrade Tests", function () {
     describe("Compliance Registry Upgrade", function () {
         it("Should upgrade compliance registry while maintaining data", async function () {
             // Set initial compliance data
-            await complianceRegistry.updateKYCStatus(user.address, 2, time.latest() + 365 days);
+            const latestTime = await time.latest();
+            await complianceRegistry.updateKYCStatus(user.address, 2, latestTime + 365 * 24 * 60 * 60);
             
             // Deploy and upgrade to new version
             const ComplianceRegistryV2 = await ethers.getContractFactory("ComplianceRegistry");

@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/access/AccessControl.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
-import "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 
-contract StablecoinProxyAdmin is AccessControl, Pausable {
+contract StablecoinProxyAdmin is UUPSUpgradeable, AccessControlUpgradeable, PausableUpgradeable {
     bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     
@@ -23,10 +23,14 @@ contract StablecoinProxyAdmin is AccessControl, Pausable {
     event UpgradeApproved(address indexed proxy, address indexed implementation);
     event UpgradeCancelled(address indexed proxy);
 
-    constructor() {
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _setupRole(UPGRADER_ROLE, msg.sender);
-        _setupRole(PAUSER_ROLE, msg.sender);
+    function initialize(address admin) public initializer {
+        __AccessControl_init();
+        __Pausable_init();
+        __UUPSUpgradeable_init();
+
+        _grantRole(DEFAULT_ADMIN_ROLE, admin);
+        _grantRole(UPGRADER_ROLE, admin);
+        _grantRole(PAUSER_ROLE, admin);
     }
 
     function requestUpgrade(
@@ -65,4 +69,9 @@ contract StablecoinProxyAdmin is AccessControl, Pausable {
     function unpause() external onlyRole(PAUSER_ROLE) {
         _unpause();
     }
+
+    function _authorizeUpgrade(address newImplementation) internal override onlyRole(UPGRADER_ROLE) {}
+
+    // Add storage gap for future upgrades
+    uint256[50] private __gap;
 } 

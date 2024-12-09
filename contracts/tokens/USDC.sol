@@ -1,16 +1,13 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.20;
 
-import "../base/BaseStablecoin.sol";
+import "../BaseToken.sol";
 
-contract USDC is BaseStablecoin {
-    uint8 private constant DECIMALS = 6;
-
-    constructor() BaseStablecoin("USD Coin", "USDC", "USD") {
-        // USDC uses 6 decimals instead of standard 18
+contract USDC is BaseToken {
+    function initialize(address owner) public initializer {
+        super.initialize("USD Coin", "USDC", owner);
     }
 
-    function decimals() public pure override returns (uint8) {
-        return DECIMALS;
-    }
-} 
+    // Add storage gap for future upgrades
+    uint256[50] private __gap;
+}
