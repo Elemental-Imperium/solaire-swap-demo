@@ -15,7 +15,44 @@ The DeFi Oracle Meta Protocol provides a secure and compliant infrastructure for
 - 🏦 Yield generation
 - 🛡️ Comprehensive security features
 
-## Architecture
+
+## Technical Architecture
+
+### Smart Contracts
+- `StablecoinProxyAdmin`: UUPS upgradeable proxy admin contract
+- `ComplianceRegistry`: KYC/AML compliance management
+- `BaseStablecoinV2`: Base implementation for stablecoins
+- `USDC`, `USDT`: Specific stablecoin implementations
+- `StablecoinSwap`: DEX functionality
+- `Vault`: Yield generation vault
+
+### Security Features
+- Multi-role access control
+- Timelock for upgrades (2 days)
+- Emergency pause functionality
+- Comprehensive monitoring system
+
+### Deployment Process
+```bash
+# Install dependencies
+pnpm install
+
+# Compile contracts
+pnpm compile
+
+# Deploy contracts
+pnpm deploy
+
+# Verify deployment
+pnpm verify
+
+# Setup security
+pnpm run setup-security
+
+# Setup monitoring
+pnpm run setup-monitoring
+```
+
 
 ```mermaid
 graph TD
@@ -159,7 +196,6 @@ yarn lint
 # Fix linting issues
 yarn lint:fix
 ```
-
 ## Documentation
 
 - [Smart Contract Architecture](docs/ARCHITECTURE.md)

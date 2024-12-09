@@ -17,7 +17,14 @@
     "fix-deps": "node scripts/fix-peer-deps.js",
     "check-deps": "pnpm why",
     "postinstall": "husky install",
-    "setup-husky": "bash scripts/setup-husky.sh"
+    "setup-husky": "bash scripts/setup-husky.sh",
+    "update-docs": "node scripts/update-docs.js",
+    "setup-security": "hardhat run scripts/security/setupSecurity.js",
+    "setup-monitoring": "hardhat run scripts/monitoring/setupMonitoring.js",
+    "deploy-all": "hardhat run scripts/deploy/orchestrator.js",
+    "verify-all": "hardhat run scripts/verify/verifyAll.js",
+    "emergency-pause": "hardhat run scripts/emergency/pause.js",
+    "upgrade-contracts": "hardhat run scripts/upgrade/upgradeStablecoin.js"
   },
   "author": "",
   "license": "MIT",
@@ -83,6 +90,8 @@
     "depcheck": "^1.4.7",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "solc": "^0.8.28"
+    "solc": "^0.8.28",
+    "prompts": "^2.4.2",
+    "chalk": "^4.1.2"
   }
 }

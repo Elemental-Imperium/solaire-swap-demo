@@ -1,0 +1,24 @@
+{
+  "ignorePatterns": [
+    "dist/*",
+    "build/*",
+    "docs/*"
+  ],
+  "ignores": [
+    "@openzeppelin/*",
+    "@nomicfoundation/*",
+    "@typechain/*",
+    "hardhat*"
+  ],
+  "parsers": {
+    "*.sol": [
+      "solidity"
+    ],
+    "*.ts": [
+      "typescript"
+    ],
+    "*.js": [
+      "es6"
+    ]
+  }
+}
